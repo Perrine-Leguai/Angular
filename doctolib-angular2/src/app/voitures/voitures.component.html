@@ -1,0 +1,19 @@
+<div id="generaleListeVoiture" class="col-12">
+    <h3 class="m-2 mb-4">LISTE DES VOITURES</h3>
+
+    <div class="listedesvoitures" *ngFor="let valeur of marque">
+
+        <ul>
+            <li class=" col-12 row">
+                <div class="nomDeLaMarque col-4">{{valeur}}</div>
+                <app-voiture class="col-8"></app-voiture>
+
+                <hr>
+            </li>
+        </ul>
+
+
+    </div>
+
+
+</div>
