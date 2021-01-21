@@ -18,13 +18,7 @@ export class VoitureComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  demarrerLaVoiture(){
-
-  }
-
-  arreterLaVoiture(){
-
-  }
+  
 
   actionnerLaVoiture(){
     if(this.statut=="arrêtée"){

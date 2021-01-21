@@ -1,11 +1,12 @@
 <div id="generaleListeVoiture" class="col-12">
     <h3 class="m-2 mb-4">LISTE DES VOITURES</h3>
 
-    <div class="listedesvoitures" *ngFor="let valeur of marque">
+    <div class="listedesvoitures" *ngFor="let voiture of voitures">
 
         <ul>
             <li class=" col-12 row">
-                <div class="nomDeLaMarque col-4">{{valeur}}</div>
+                <div class="nomDeLaMarque col-4">{{voiture.marque}}</div>
+                <button (click)="actionnerLaVoiture()" type="button" class="btn btn-{{class}}"><i class="fas fa-{{icon}}" ></i></button>
                 <app-voiture class="col-8"></app-voiture>
 
                 <hr>
