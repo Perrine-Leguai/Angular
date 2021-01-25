@@ -1,0 +1,38 @@
+
+<div class="row" >
+  <div class="col-6">
+    {{ laVoiture.marque }}
+  </div>
+  <div class="col-6">
+    <!-- <button
+      (click)="demarrerArreter()"
+      [class]="laVoiture.status === 'Démarrée' ? 'btn btn-danger w-100' : 'btn btn-success w-100'"
+      >
+      {{ laVoiture.status === 'Démarrée' ? 'Arrêter' : 'Démarrer'}}
+    </button>
+    <button
+      (click)="demarrerArreter()"
+      [ngClass]="{
+                  'btn': true,
+                  'btn-danger':  laVoiture.status === 'Démarrée',
+                  'btn-success': laVoiture.status === 'Arrêtée',
+                  'w-100': true
+                }"
+      >
+      {{ laVoiture.status === 'Démarrée' ? 'Arrêter' : 'Démarrer'}}
+    </button> -->
+    <button
+      *ngIf="laVoiture.status === 'Démarrée'"
+      (click)="demarrerArreter()"
+      class="btn btn-danger w-100">Arrêter
+    </button>
+    <button
+      *ngIf="laVoiture.status === 'Arrêtée'"
+      (click)="demarrerArreter()"
+      class="btn btn-success w-100">Démarrer
+  </button>
+  </div>
+</div>
+<hr>
+
+

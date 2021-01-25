@@ -1,11 +1,13 @@
-import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+
 
 import { AppComponent } from './app.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { VoituresComponent } from './voitures/voitures.component';
 import { DetailsComponent } from './details/details.component';
-import { VoitureComponent } from './voitures/voiture/voiture.component';
+import { VoitureComponent } from './voiture/voiture.component';
+import { AjouterVoitureComponent } from './ajouter-voiture/ajouter-voiture.component';
+import { ListeVoitureComponent } from './liste-voiture/liste-voiture.component';
 
 @NgModule({
   declarations: [
@@ -13,10 +15,12 @@ import { VoitureComponent } from './voitures/voiture/voiture.component';
     VoituresComponent,
     DetailsComponent,
     VoitureComponent,
+    AjouterVoitureComponent,
+    ListeVoitureComponent,
   ],
   imports: [
     BrowserModule,
-    NgbModule
+    NgModule
   ],
   providers: [],
   bootstrap: [AppComponent]
