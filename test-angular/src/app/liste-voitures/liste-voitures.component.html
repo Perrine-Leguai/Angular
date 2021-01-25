@@ -1,0 +1,5 @@
+<h3 class="mb-5">Mon garage</h3>
+<app-ajouter-voiture (addVoitureEventEmitter)="addReceivedVoiture($event)"></app-ajouter-voiture>
+<hr>
+<app-voiture (selectVoiture)="receivedDetails($event)"*ngFor="let voiture of listeVoitures" [laVoiture]="voiture"></app-voiture>
+
