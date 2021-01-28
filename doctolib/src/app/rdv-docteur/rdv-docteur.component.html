@@ -1,0 +1,30 @@
+<div class="col-10 offset-1 mt-5 mb-5 p-4 border border-success">
+  <div>
+    <h3>{{currentDate | date:'dd/MM/yyyy'}} - Vos rendez-vous:</h3>
+    <div class="row">
+      <div *ngFor="let rdv of listeRdvs" class="col-4" >
+        <div *ngIf="rdv.date === currentDate">
+          {{rdv.idPatient[0]}} {{rdv.idPatient[1]}}<br>
+          {{rdv.idPatient[2]}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mt-5">
+    <h4>Vos rendez-vous à venir</h4>
+    <div class="row d-flex">
+      <div *ngFor="let rdv of listeRdvs"  class="col-4"> 
+        <div *ngIf=" rdv.date > currentDate ">  
+          <div>
+            <strong>{{rdv.date | date:'dd/MM/yyyy'}}</strong> <br>
+            {{rdv.idPatient[0]}} {{rdv.idPatient[1]}}<br>
+            {{rdv.idPatient[2]}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a href="#" class="mt-5 d-flex justify-content-end">Consulter l'historique de vos rendez-vous !</a>
+  <!-- POUR AFFICHAGE LISTE DES RDVS :
+  si date == date aujorud'hui alors mettre dans la div, sinon mettre dans historique ou à venir -->
+</div>

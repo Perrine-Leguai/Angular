@@ -1,0 +1,27 @@
+<div class="col-10 offset-1 mt-5 mb-5 p-4 border border-secondary">
+  <h3>Ici vos infos</h3> <br>
+  <!-- affichage de toutes les informations docteurs -->
+  <div class="row">
+    <div id="infos" class="col-6">
+      <div class="mr-1 ml-1 mt-1 mb-2">Dr. {{personne?.nom |  uppercase}} {{personne?.prenom | titlecase }}</div>
+      <div class="m-1">
+        <div>{{personne?.adresseTravail}}</div>
+        <div>{{personne?.codePostal}}</div>
+        <div>{{personne?.ville}}</div>
+      </div>
+      <br>
+      <div class="m-1">
+        <div>{{personne?.email}}</div>
+        <div>{{personne?.telephone}}</div>
+        <div>{{personne?.lienSiteInternet}}</div>
+      </div>
+    </div>
+    <div id="specialites" class="col-6">
+      <h5>Vos spécialités</h5>
+      <div *ngFor="let spe of personne?.specialites">
+        {{spe}}
+      </div>
+    </div>
+  </div>
+  
+</div>
