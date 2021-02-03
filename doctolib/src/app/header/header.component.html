@@ -1,8 +1,8 @@
 <header>
 
-  <div class=" ml-4 mt-1 mr-4" >
+  <div class=" ml-4 mt-1 " >
     <div   id="navbarGenerale" class="row ">
-      <div class=" col-2 d-flex "><img src="assets/img/logo.png" alt="image" width="90" height="90" class=" mt-2 mb-2 d-inline-block align-top" /></div>
+      <div class=" col-1 d-flex "><img src="assets/img/logo.png" alt="image" width="90" height="90" class=" mt-2 mb-2 d-inline-block align-top" /></div>
 
       <nav class="col-7 navbar navbar-expand-lg navbar-dark bg-primary">
         <a class="navbar-brand mr-5"  href="#">Mon Doctolib</a>
@@ -12,28 +12,29 @@
 
         <div class="collapse navbar-collapse" id="navbarColor01">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" routerLinkActive="active" href="#">Mes infos
-                <!-- <span class="sr-only">(current)</span> -->
+            <li class="nav-item " >
+              <a class="nav-link" [routerLinkActiveOptions]="{exact : true}" routerLinkActive="active" [routerLink]="['/bienvenue']">Mes infos
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" routerLinkActive="active" href="#">Prendre rdv</a>
+              <a class="nav-link" routerLinkActive="active"[routerLink]="['/bienvenue', 'rdv']">Prendre rdv</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" routerLinkActive="active" href="#">Historiques des rdv</a>
+              <a class="nav-link" routerLinkActive="active" [routerLink]="['/bienvenue', 'historique']">Historiques des rdv</a>
             </li>
           </ul>
         </div>
       </nav>
-    <div class="col-3 d-flex justify-content-end align-items-center">
-        <div class=" dropdownz ">
-          <a class="btn dropdown-toggle" data-toggle="dropdown" id="dropdownMenuLink" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mon compte</a>
+      <div class="col-3 d-flex justify-content-end align-items-center">
+        <div class="btn-group dropstart">
+          <a class="btn dropdown-toggle" data-toggle="dropdown" id="dropdownMenuLink" role="button" aria-haspopup="true" aria-expanded="false">Mon compte</a>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
             <a class="dropdown-item" href="#">Modifier mes infos</a>
-            <a class="dropdown-item" href="#">Me déconnecter</a>
+            <!-- renvoie au formulaire de modif des infos -->
+            <a class="dropdown-item" [routerLink]="['/']">Me déconnecter</a>
+            <!-- session start à zero -->
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Supprimer mon compte</a>
+            <a class="dropdown-item" [routerLink]="['/']" (click)="supprimerCompte($event)" >Supprimer mon compte</a>
           </div>
         </div>
     </div>

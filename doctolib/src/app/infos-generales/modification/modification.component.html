@@ -1,0 +1,62 @@
+<div class="border p-3">
+
+
+
+<form>
+  <div class="form-group">
+    <label for="Username" class="text-dark">Pseudo</label>
+    <input type="text" class="form-control" id="Username" placeholder={{personne?.pseudo}} required>
+  </div>
+  <div class="row">
+    <div class="form-group col-6">
+      <label for="nom" class="text-dark">Nom</label>
+      <input type="text" class="form-control" id="nom" placeholder={{personne?.nom}} required>
+    </div>
+    <div class="form-group col-6">
+      <label for="prenom" class="text-dark">Prénom</label>
+      <input type="text" class="form-control" id="prenom" placeholder={{personne?.prenom}}  required>
+    </div>
+  </div>
+  <div class="form-group ">
+    <label for="adresse" class="text-dark">Adresse</label>
+    <input type="text" class="form-control" id="adresse" placeholder={{personne?.adresse ? personne?.adresse : personne?.adresseTravail}} required>
+  </div>
+  <div class="row">
+    <div class="form-group col-6">
+      <label for="codePostal" class="text-dark">Code Postal</label>
+      <input type="text" class="form-control" id="codePostal" placeholder={{personne?.codePostal}} required>
+    </div>
+    <div class="form-group col-6">
+      <label for="ville" class="text-dark">Ville</label>
+      <input type="text" class="form-control" id="ville" placeholder={{personne?.ville}} required>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="noCarteVitale" class="text-dark">{{personne?.profil=="PATIENT"? "N° Carte Vitale" : "N° Ordre"}}</label>
+    <input type="text" class="form-control" id="noCarteVitale" placeholder={{personne?.carteVitale ? personne?.numeroCarteVitale : personne?.numeroOrdre}} required>
+  </div>
+  
+  <div class="form-group">
+    <label for="email" class="text-dark">Email</label>
+    <input type="email" class="form-control" id="email" placeholder={{personne?.email}} required>
+  </div>
+  <div class="form-group">
+    <label for="telephone" class="text-dark">Telephone</label>
+    <input type="text" class="form-control" id="telephone" placeholder={{personne?.telephone}} >
+  </div>
+  <hr>
+  <div class="row mt-4">
+    <div class="form-group col-6">
+      <label for="password" class="text-dark">Mot de passe</label>
+      <input type="password" class="form-control" id="password" placeholder="******" required >
+    </div>
+    <div class="form-group col-6">
+      <label for="passwordConfirmed" class="text-dark">Confirmer le mot de passe</label>
+      <input type="password" class="form-control" id="passwordConfirmed" placeholder="******" required >
+    </div>
+</div>
+</form>
+<div class=" d-flex justify-content-center mt-5">
+    <button class="btn btn-primary" (click)="enregistrerModif($event)"> S'inscrire</button>
+</div>
+</div>

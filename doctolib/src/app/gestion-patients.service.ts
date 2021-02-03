@@ -9,7 +9,7 @@ export class GestionPatientsService {
 
   constructor(private http : HttpClient) { }
 
-  
+
   getPatientsParDocteur(id :number){
     let getParPatient = this.http.get<Patient[]>("http://localhost:8000/api/docteurs/patients/"+id,{
       observe : 'body',
@@ -31,8 +31,9 @@ export class GestionPatientsService {
       return deleteOnePatient;
   }
 
-  postOnePatient(patient :Patient){
-    let postOnePatient = this.http.post<Patient[]>("http://localhost:8000/api/patients/",{
+  postOnePatient(patient ){
+    console.log('je suis dans le service');
+    this.http.post<any>("http://localhost:8000/api/patients",{
       numeroCarteVitale : patient.numeroCarteVitale,
       nom: patient.nom,
       prenom : patient.prenom,
@@ -41,12 +42,16 @@ export class GestionPatientsService {
       ville: patient.ville,
       email: patient.email,
       telephone: patient.telephone,
-      // username : patient.username,
-      // password : patient.password
+      username : patient.username,
+      password : patient.password
     },{
-      observe : 'body',
+      observe : 'response',
+    }).subscribe((response)=>{
+      console.log(response);
+    }, error => {
+      console.log(error);
     })
-      return postOnePatient;
+
   }
 
   putOnePatient(patient :Patient){

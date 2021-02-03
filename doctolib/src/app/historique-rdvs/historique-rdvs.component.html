@@ -3,9 +3,11 @@
     <h3>Historique de vos rendez-vous :</h3>
     
     <div *ngFor="let rdv of listeRdvs" class="col-4" >
-      <strong>{{rdv.date | date:'dd/MM/yyyy'}}</strong> <br>
+      <div *ngIf=" rdv.date < currentDate ">
+        <strong>{{rdv.date | date:'dd/MM/yyyy'}}</strong> <br>
         {{rdv.idPatient[0]}} {{rdv.idPatient[1]}}<br>
         {{rdv.idPatient[2]}}
+      </div>
     </div>
       
   </div>
