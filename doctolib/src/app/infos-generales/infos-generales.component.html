@@ -1,4 +1,7 @@
 <div class="col-10 offset-1 mt-5 mb-5 p-4 border border-secondary">
   <router-outlet></router-outlet>
-
 </div>
+<div *ngIf="profilDoc">
+<app-rdv-docteur></app-rdv-docteur></div>
+<div *ngIf="profilPatient">
+<app-rdv-docteur></app-rdv-docteur></div>

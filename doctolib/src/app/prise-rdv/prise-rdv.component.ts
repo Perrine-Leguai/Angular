@@ -3,7 +3,8 @@ import { GestionSpecialitesService } from '../gestion-specialites.service'
 import { Specialite } from '../modeles/specialite.model'
 import { Docteur } from '../modeles/docteur.model'
 import { GestionDocteursService } from '../gestion-docteurs.service';
-import { NgxSpinnerService } from 'ngx-spinner';
+import { GestionRdvsService } from '../gestion-rdvs.service';
+import { Patient } from '../modeles/patient.model';
 
 @Component({
   selector: 'app-prise-rdv',
@@ -20,53 +21,56 @@ export class PriseRdvComponent implements OnInit {
   dateRecuperee: string;
   doc : Docteur;
   getDoc1: any;
+  patientId : number = 8 ; //sera initialisé à la connexion
 
   constructor(
-    private specialiteService : GestionSpecialitesService, 
+    private specialiteService : GestionSpecialitesService,
     private docteurService : GestionDocteursService,
-    private spinnerService : NgxSpinnerService) { }
+    private priseRdvService : GestionRdvsService) { }
 
   ngOnInit(): void {
-    this.spinnerService.show()
+
     // récupération pour l'affichage de toutes les spécialités
     this.getSpecialite = this.specialiteService.getAllSpecialites();
     this.getSpecialite.subscribe((response) => {
       this.specialites = response;
-      this.spinnerService.hide()
+
     }, (error) => {
       console.log(error);
-    }) 
+    })
   }
 
   recupSpecialite(event : Event){
-    this.spinnerService.show()
+
     this.specialiteRecuperee = (<HTMLInputElement>event.target).value
+    console.log(this.specialiteRecuperee);
     // affichage des docteurs ayant cette spécialité
     this.getDoc = this.specialiteService.getDocsBySpecialite(this.specialiteRecuperee);
     this.getDoc.subscribe((response) =>{
-      this.spinnerService.hide()
+
       this.listeDocs = response;
-      
+
     })
   }
 
   recupDoc(event : Event){
     this.docRecupere = (<HTMLInputElement>event.target).value
-    console.log(event);
-    this.spinnerService.show()
+
     this.getDoc1 = this.docteurService.getOneDocteur(this.docRecupere);
     this.getDoc1.subscribe((response)=>{
       this.doc = response;
       console.log(this.doc);
-      this.spinnerService.hide()
+
     })
   }
 
   dateRecup(event :Event){
-    this.spinnerService.show()
+
     this.dateRecuperee = (<HTMLInputElement>event.target).value
-    this.spinnerService.hide()
+
   }
 
-  
+  validerRdv(){
+    this.priseRdvService.postRdv(this.dateRecuperee, this.doc.id, this.patientId)
+  }
 }

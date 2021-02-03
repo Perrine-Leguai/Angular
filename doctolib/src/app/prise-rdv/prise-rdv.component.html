@@ -1,6 +1,6 @@
 <div class="col-8 offset-2">
   <div class="border p-3">
-    
+
     <!-- Attention form dynamique si c'est un doc ou un patient qui est connecté -->
     <!--  doit selectionner automatiquement l'id et le profil de la personne connectée pour préremplir l'objet priseRdv -->
     <div class="form-group row">
@@ -8,19 +8,19 @@
       <div class="col-6">
         <select id="choixDocteur" class="form-control col-8" (change)="recupSpecialite($event)">
           <option disabled selected>Choisissez une spécialité</option>
-           <option   *ngFor="let spe of specialites" value={{spe.id}}>{{spe.nom}}</option>  
+           <option   *ngFor="let spe of specialites" value={{spe.nom}}>{{spe.nom}}</option>
         </select>
       </div>
     </div>
-  
+
     <form class="mb-3">
-    
+
     <div class="form-group row">
       <label for="choixDocteur" class="col-3">Docteur :</label>
       <div class="col-6">
         <select id="choixDocteur" class="form-control col-8" (change)="recupDoc($event)">
           <option disabled selected>Choisissez un docteur</option>
-           <option *ngFor="let doc of listeDocs" value={{doc?.id}}>Dr. {{doc?.nom}} {{doc?.prenom}}</option>  
+           <option *ngFor="let doc of listeDocs" value={{doc?.id}}>Dr. {{doc?.nom}} {{doc?.prenom}}</option>
         </select>
       </div>
     </div>
@@ -36,10 +36,10 @@
     <strong> Le {{dateRecuperee | date:'d/M/yy, h:mm:a'}} </strong> <br>  Vous avez rendez-vous avec <strong>Dr. {{doc?.nom}}, <br> {{doc?.adresseTravail}}.</strong> à <strong>{{doc?.codePostal}}, {{doc?.ville}}</strong>
     <hr >
     <div class="d-flex flex-row-reverse">A très vite !</div>
-    
+
   </div>
     <div class=" d-flex justify-content-center mt-5">
-        <button class="btn btn-primary "> Valider le rendez-vous</button>
+        <a class="btn btn-primary " (click)="validerRdv()"> Valider le rendez-vous</a>
     </div>
   </div>
 </div>

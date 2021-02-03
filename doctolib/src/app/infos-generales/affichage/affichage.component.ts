@@ -21,8 +21,8 @@ export class AffichageComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.profil ==="DOCTEUR"){
-      this.get = this.docteurService.getOneDocteur(1);
-      this.profilDoc=true
+      this.get = this.docteurService.getOneDocteur(2);
+      this.profilDoc=true;
     }else if(this.profil==="PATIENT"){
       this.get = this.patientService.getOnePatient(1);
     }
@@ -31,9 +31,9 @@ export class AffichageComponent implements OnInit {
     }, (error) => {
       console.log(error);
     })
-      
+
   }
 
-  
+
 
 }

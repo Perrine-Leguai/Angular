@@ -10,15 +10,26 @@ import { Docteur } from '../modeles/docteur.model';
 })
 export class InfosGeneralesComponent implements OnInit {
   get ;
-  personne: Docteur;
+  personne: any;
+  profil: string = "DOCTEUR"; //pour le test
+  profilDoc: boolean;
+  profilPatient: boolean;
   constructor(
     private docteurService : GestionDocteursService,
     private patientService : GestionPatientsService) { }
 
   ngOnInit(): void {
-    this.get = this.docteurService.getOneDocteur(1);
+    if(this.profil ==="DOCTEUR"){
+      this.get = this.docteurService.getOneDocteur(2);
+      this.profilDoc=true;
+    }else if(this.profil==="PATIENT"){
+      this.get = this.patientService.getOnePatient(1);
+      this.profilPatient = true;
+    }
+
     this.get.subscribe((response) => {
       this.personne = response;
+      console.log('on est al', this.personne);
     }, (error) => {
       console.log(error);
     })
