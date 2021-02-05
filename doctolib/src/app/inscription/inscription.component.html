@@ -10,7 +10,7 @@
       {{pattern}}
     </div>
     
-  <form [hidden]="!profilRecupere"  (ngSubmit)="onSubmit(monForm.value)" #monForm="ngForm" >
+  <form [hidden]="!profilRecupere "  (ngSubmit)="onSubmit(monForm.value)" #monForm="ngForm" >
     <div class="form-group">
       <label for="username" class="text-dark">Pseudo</label>
       <input [(ngModel)]="username" type="text" class="form-control" name="username" id="username" placeholder="Ninja65"  required> 

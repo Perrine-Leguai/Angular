@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthenticationServiceService } from '../authentication-service.service';
 import { GestionDocteursService } from '../gestion-docteurs.service';
 import { GestionPatientsService } from '../gestion-patients.service';
 import { Docteur } from '../modeles/docteur.model';
@@ -14,11 +17,24 @@ export class ConnexionComponent implements OnInit {
   listePersonne: any[];
   ok: boolean=false;
 
+   //pvariable pour la connexion :
+   loginForm;
+   error :string ="";
 
+   //point pédagogie :
+   //le constructeur est appelé dès qu'on isntance la classe
   constructor(
     private docteurService: GestionDocteursService,
-    private patientService: GestionPatientsService
-  ) { }
+    private patientService: GestionPatientsService,
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private authenticationService : AuthenticationServiceService,
+  ) { 
+    this.loginForm = formBuilder.group({
+      'username': ['', Validators.required],
+      'password': ['', Validators.required]
+    });
+  }
 
   ngOnInit(): void {
   }
@@ -65,11 +81,18 @@ export class ConnexionComponent implements OnInit {
     this.profilRecupere = (<HTMLInputElement>event.target).value
   }
 
-  login(username:string){
-
-  }
+   onSubmit(){
+     console.log('ici le submit')
+  //   this.authenticationService
+  //       .authenticate(this.loginForm.value)
+  //       .subscribe(data =>{
+  //         localStorage.setItem('id_token', data.token);
+  //         this.router.navigate(['post']);
+  //       },
+  //       error => this.error = error.message);
+   }
 
   logout(){
-    
+
   }
 }

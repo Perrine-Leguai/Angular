@@ -13,7 +13,7 @@ import { PriseRdvComponent } from './prise-rdv/prise-rdv.component';
 import { GestionRdvsService } from './gestion-rdvs.service';
 import { GestionDocteursService } from './gestion-docteurs.service';
 import { GestionPatientsService } from './gestion-patients.service';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HistoriqueRdvsComponent } from './historique-rdvs/historique-rdvs.component';
 import { AccueilComponent } from './accueil/accueil.component';
 import {RouterModule, Routes } from '@angular/router';
@@ -26,6 +26,7 @@ import {NgxSpinnerModule} from 'ngx-spinner';
 import { AffichageComponent } from './infos-generales/affichage/affichage.component';
 import { ModificationComponent } from './infos-generales/modification/modification.component';
 import { GestionSpecialitesService } from './gestion-specialites.service';
+import { AuthenticationServiceService } from './authentication-service.service';
 
 
 const ROUTES: Routes =[
@@ -65,6 +66,7 @@ const ROUTES: Routes =[
     CoComponent,
     AffichageComponent,
     ModificationComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -76,7 +78,7 @@ const ROUTES: Routes =[
     ReactiveFormsModule
   ],
   exports:[RouterModule],
-  providers: [GestionRdvsService, GestionDocteursService, GestionPatientsService, GestionSpecialitesService ],
+  providers: [GestionRdvsService, GestionDocteursService, GestionPatientsService, GestionSpecialitesService, AuthenticationServiceService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { 
