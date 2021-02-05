@@ -6,5 +6,8 @@
     <div class="col-6">
       <app-details></app-details>
     </div>
+    <div class="col-12" *ngFor="let produit of listeProduits">
+      L e produit {{produit.designation}} coûte {{ produit.prix }}
+    </div>
   </div>
 </div>

@@ -9,7 +9,7 @@ export class GestionSpecialitesService {
 
   constructor(private http : HttpClient) { }
 
-  
+
 
   getAllSpecialites(){
     let getAllSpe=this.http.get<Specialite[]>("http://localhost:8000/api/specialites",{
@@ -23,5 +23,12 @@ export class GestionSpecialitesService {
     observe : 'body',
   })
     return getDocsBySpe;
+  }
+
+  getOneSpecialite(id: number){
+    let getOneSpe=this.http.get<Specialite>("http://localhost:8000/api/specialite/"+id,{
+    observe : 'body',
+  })
+    return getOneSpe;
   }
 }

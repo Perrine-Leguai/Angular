@@ -8,7 +8,7 @@ import { DetailsComponent } from './details/details.component';
 import { VoitureComponent } from './voiture/voiture.component';
 import { AjouterVoitureComponent } from './ajouter-voiture/ajouter-voiture.component';
 import { ListeVoitureComponent } from './liste-voiture/liste-voiture.component';
-
+import { HttpClientModule} from '@angular/common/http'
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +20,8 @@ import { ListeVoitureComponent } from './liste-voiture/liste-voiture.component';
   ],
   imports: [
     BrowserModule,
-    NgModule
+    NgModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,13 +1,15 @@
 <div class="col-10 offset-1 mt-5 mb-5 p-4 border border-success">
   <div>
-    <h3>{{currentDate | date:'dd/MM/yyyy'}} - Vos rendez-vous:</h3>
+    <h3>Vos rendez-vous du : {{currentDate | date:'dd/MM/yyyy'}}</h3>
     <div class="row">
-      <div *ngFor="let rdv of listeRdvs" class="col-4" >
-        <div *ngIf="rdv.date === currentDate">
+      <div id="ajdRdv" *ngFor="let rdv of listeRdvs" class="col-4" >
+        <div  *ngIf="rdv.date === currentDate">
           {{rdv.idPatient[0]}} {{rdv.idPatient[1]}}<br>
           {{rdv.idPatient[2]}}
         </div>
+        
       </div>
+     <div class="alert" [hidden]="rempli" class="alert alert-secondary col-6 m-3" role="alert">Vous n'avez aucun rendez-vous aujourd'hui</div>
     </div>
   </div>
   <div class="mt-5">

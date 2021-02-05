@@ -20,12 +20,14 @@ export class ModificationComponent implements OnInit {
   ngOnInit(): void {
     if(this.profil=="PATIENT"){
       this.get= this.patientService.getOnePatient(this.id);
+      
     }else if(this.profil =="DOCTEUR"){
       this.get= this.docteurService.getOneDocteur(this.id);
     }
     this.get.subscribe((response) => {
-        console.log(response);
+        
         this.personne = response ;
+        console.log(this.personne);
       }, (error) => {
         console.log(error);
       })

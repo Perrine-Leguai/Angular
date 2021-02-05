@@ -1,9 +1,21 @@
 
     <div class="border p-3">
-        <form>
+      <div class="form-group">
+        <label for="exampleFormControlSelect1">Êtes vous un.e patient.e ou un.e praticien.ne ?</label>
+        <select class="form-control" id="exampleFormControlSelect1" (change)="recupProfil($event)">
+          <option disabled selected>-- Choisir un profil utilisateur.rice--</option>
+          <option value="patient">Patient.e</option>
+          <option value="docteur">Praticien</option>
+        </select>
+      </div>
+      
+    <form [hidden]="profilRecupere==null"  >
+        
           <div class="form-group">
             <label for="username">Pseudo</label>
-            <input id="username" type="text" class="form-control">
+            <input id="username" type="text" class="form-control" (keyup)="testPseudo($event)">
+            <div id="usernameko" [hidden]="ok">Ce pseudo n'existe pas</div>
+            <div id="usernameok" [hidden]="!ok">Bienvue à bord !</div>
           </div>
           <div class="form-group">
             <label for="password">Mot de passe</label>

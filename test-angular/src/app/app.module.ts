@@ -8,6 +8,8 @@ import { DetailsComponent } from './details/details.component';
 import { ListeVoituresComponent } from './liste-voitures/liste-voitures.component';
 import { VoitureComponent } from './voiture/voiture.component';
 import { GestionVoitureService } from './gestion-voiture.service';
+import { ColorfullyDirective } from './colorfully.directive';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,11 +17,13 @@ import { GestionVoitureService } from './gestion-voiture.service';
     AjouterVoitureComponent,
     DetailsComponent,
     ListeVoituresComponent,
-    VoitureComponent
+    VoitureComponent,
+    ColorfullyDirective
   ],
   imports: [
     BrowserModule,
-    NgbModule
+    NgbModule,
+    FormsModule
   ],
   providers: [GestionVoitureService],
   bootstrap: [AppComponent]

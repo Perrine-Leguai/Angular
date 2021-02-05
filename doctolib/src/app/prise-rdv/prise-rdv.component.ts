@@ -5,6 +5,7 @@ import { Docteur } from '../modeles/docteur.model'
 import { GestionDocteursService } from '../gestion-docteurs.service';
 import { GestionRdvsService } from '../gestion-rdvs.service';
 import { Patient } from '../modeles/patient.model';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-prise-rdv',
@@ -22,11 +23,16 @@ export class PriseRdvComponent implements OnInit {
   doc : Docteur;
   getDoc1: any;
   patientId : number = 8 ; //sera initialisé à la connexion
+  navigationSubscription;
 
   constructor(
     private specialiteService : GestionSpecialitesService,
     private docteurService : GestionDocteursService,
-    private priseRdvService : GestionRdvsService) { }
+    private priseRdvService : GestionRdvsService,
+    private router: Router,
+    private route : ActivatedRoute) {
+
+    }
 
   ngOnInit(): void {
 
@@ -71,6 +77,12 @@ export class PriseRdvComponent implements OnInit {
   }
 
   validerRdv(){
-    this.priseRdvService.postRdv(this.dateRecuperee, this.doc.id, this.patientId)
+    this.priseRdvService.postRdv(this.dateRecuperee, this.doc.id, this.patientId);
+    this.router.navigate(['/bienvenue'], {relativeTo: this.route});
+
   }
+
+
+
+
 }

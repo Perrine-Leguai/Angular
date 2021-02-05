@@ -18,8 +18,9 @@
     </div>
     <div [hidden]="!profilDoc" id="specialites" class="col-6">
       <h5>Vos spécialités</h5>
-      <div *ngFor="let spe of personne?.specialites">
-        {{spe}}
+      <p>ici vos spe :{{listeSpe}} </p>
+      <div *ngFor="let spe of listeSpe">
+        {{spe.nom}}
       </div>
     </div>
   </div>

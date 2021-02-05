@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { FormArray } from '@angular/forms';
 import { textChangeRangeIsUnchanged } from 'typescript';
@@ -46,6 +46,10 @@ export class InscriptionComponent implements OnInit {
   //variable pour la comparaison des mdp
   mdp: string;
   confirmMdp:string;
+
+  //variable pour la validité du mail
+  pattern : string | RegExp
+   
 
 
   constructor(

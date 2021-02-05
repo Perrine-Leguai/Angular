@@ -29,7 +29,7 @@ export class InfosGeneralesComponent implements OnInit {
 
     this.get.subscribe((response) => {
       this.personne = response;
-      console.log('on est al', this.personne);
+      
     }, (error) => {
       console.log(error);
     })

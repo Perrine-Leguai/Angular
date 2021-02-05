@@ -15,6 +15,7 @@ export class RdvDocteurComponent implements OnInit {
   myDate = new Date();
   currentDate;
   get;
+  rempli: boolean =true ;
   listeRdvs: Rdv [];
 constructor(
   private datePipe: DatePipe,
@@ -25,9 +26,13 @@ constructor(
 }
 
 ngOnInit(){
-  this.get = this.rdvService.getRdvsSelonLaPersonneConnectee(1, "DOCTEUR");  //id dynamique ici normalement
+  this.get = this.rdvService.getRdvsSelonLaPersonneConnectee(2, "DOCTEUR");  //id dynamique ici normalement
   this.get.subscribe((response) => {
     this.listeRdvs = response;
+    let contenuDiv = document.getElementById( 'ajdRdv' );
+    if(!contenuDiv){
+      this.rempli=false;
+    }
   }, (error) => {
     console.log(error);
   })
