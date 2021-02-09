@@ -9,7 +9,12 @@ export class GestionPatientsService {
 
   constructor(private http : HttpClient) { }
 
-
+  getAllPatientsPseudo(){
+    let getAllPatientsPseudo = this.http.get("http://localhost:8000/api/patients/username", {
+      observe : 'body',
+    })
+    return getAllPatientsPseudo;
+  }
   getPatientsParDocteur(id :number){
     let getParPatient = this.http.get<Patient[]>("http://localhost:8000/api/docteurs/patients/"+id,{
       observe : 'body',
@@ -18,7 +23,7 @@ export class GestionPatientsService {
   }
 
   getOnePatient(id){
-    let getOnePatient = this.http.get<Patient[]>("http://localhost:8000/api/patients/"+id,{
+    let getOnePatient = this.http.get<Patient>("http://localhost:8000/api/patients/"+id,{
       observe : 'body',
     })
       return getOnePatient;
