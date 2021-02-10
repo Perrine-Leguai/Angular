@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
+import { Route } from '@angular/compiler/src/core';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import {Patient} from './modeles/patient.model';
 
 @Injectable({
@@ -7,10 +9,11 @@ import {Patient} from './modeles/patient.model';
 })
 export class GestionPatientsService {
 
-  constructor(private http : HttpClient) { }
+  constructor(private http : HttpClient,
+    private router: Router) { }
 
   getAllPatientsPseudo(){
-    let getAllPatientsPseudo = this.http.get("http://localhost:8000/api/patients/username", {
+    let getAllPatientsPseudo = this.http.get("http://localhost:8000/apo/patients/username", {
       observe : 'body',
     })
     return getAllPatientsPseudo;
@@ -37,8 +40,8 @@ export class GestionPatientsService {
   }
 
   postOnePatient(patient ){
-    console.log('je suis dans le service');
-    this.http.post<any>("http://localhost:8000/api/patients",{
+
+    this.http.post<any>("http://localhost:8000/apo/patients",{
       numeroCarteVitale : patient.numeroCarteVitale,
       nom: patient.nom,
       prenom : patient.prenom,
@@ -52,9 +55,12 @@ export class GestionPatientsService {
     },{
       observe : 'response',
     }).subscribe((response)=>{
-      console.log(response);
+      console.log(response.status);
+      this.router.navigate(['/connexion'])
+
     }, error => {
-      console.log(error);
+
+      return error;
     })
 
   }

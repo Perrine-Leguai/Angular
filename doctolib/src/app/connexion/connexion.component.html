@@ -9,29 +9,34 @@
         </select>
       </div>
 
-      <div [hidden]="!error" class="alert alert-danger" role="alert">
-        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-        <span class="sr-only">Error:</span>
+      <div [hidden]="!alert" class="alert alert-danger" role="alert">
+
+        <span >Votre mot de passe est incorrect ou ne correspond pas à cet identifiant</span>
       </div>
-      
-      <form [hidden]="profilRecupere==null" [formGroup]="loginForm" (ngSubmit)="onSubmit()" >
-        
-          <div class="form-group">
-            <label for="username">Pseudo</label>
-            <input id="username" type="text" class="form-control" placeholder="Ex : Ninja55" formControlName="username" (keyup)="testPseudo($event)" required>
+
+      <form [hidden]="profilRecupere==null" id="formConnexion" (ngSubmit)="onSubmit(formContent)" #formContent="ngForm" >
+
+          <div >
+            <label for="username" class="form-label">Pseudo</label>
+            <input id="username" type="text" class="form-control" placeholder="Ex : Ninja55" name="username" (keyup)="testPseudo($event)" ngModel required>
             <div id="usernameko" [hidden]="ok">Ce pseudo n'existe pas</div>
             <div id="usernameok" [hidden]="!ok">Bienvue à bord !</div>
           </div>
-          <div class="form-group">
-            <label for="password">Mot de passe</label>
-            <input id="password" type="password" class="form-control" placeholder="*******" formControlName="password" required>
+          <div >
+            <label for="password" class="form-label">Mot de passe</label>
+            <input id="password" type="password" class="form-control" placeholder="*******" name="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{7,}$" ngModel required>
           </div>
 
           <div class=" d-flex justify-content-center mt-5">
-            <button type="submit" class="btn btn-primary pull-right" [disabled]="!loginForm.valid"> Se connecter</button>
+            <button type="submit" class="btn btn-primary pull-right" [disabled]="formContent.invalid"> Se connecter</button>
         </div>
         </form>
-        
+
     </div>
-  
+    <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">
+      <p style="color: white">
+        En chargement
+      </p>
+    </ngx-spinner>
+
 

@@ -16,12 +16,12 @@ export class AppComponent implements OnInit {
 
   }
   ngOnInit(){
-    this.get = this.docteurService.getDocs();
-    this.get.subscribe((response) => {
-      this.listeDocs = response;
-    }, (error) => {
-      console.log(error);
-    })
+    // this.get = this.docteurService.getDocs();
+    // this.get.subscribe((response) => {
+    //   this.listeDocs = response;
+    // }, (error) => {
+    //   console.log(error);
+    // })
   }
 
 }

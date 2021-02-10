@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { FormArray } from '@angular/forms';
-import { textChangeRangeIsUnchanged } from 'typescript';
+import { forEachChild, textChangeRangeIsUnchanged } from 'typescript';
 import { GestionDocteursService } from '../gestion-docteurs.service';
 import { GestionPatientsService } from '../gestion-patients.service';
 import { GestionSpecialitesService } from '../gestion-specialites.service';
@@ -20,7 +20,7 @@ export class InscriptionComponent implements OnInit {
   profilRecupere: string;
   ok:boolean =false ;
   specialites: Specialite[];
-  
+
 
   //variables pour l'utilistation de l'api
   getSpecialite:any;
@@ -42,14 +42,18 @@ export class InscriptionComponent implements OnInit {
   telephone: string;
   lienSiteInternet: string;
   password: string;
-  
+
   //variable pour la comparaison des mdp
   mdp: string;
   confirmMdp:string;
 
-  //variable pour la validité du mail
-  pattern : string | RegExp
-   
+  //variable pour la confirmation de la dispo du pseudo
+  pseudo: boolean = false;
+  pseudos: any= [];
+
+  //variable de verification de l'inscription
+  error: any;
+  pb: boolean = false;
 
 
   constructor(
@@ -61,25 +65,25 @@ export class InscriptionComponent implements OnInit {
   //affichage du forumlaire selon profil
   recupProfil(event : Event){
     this.profilRecupere = (<HTMLInputElement>event.target).value
-    
+
   }
 
   ngOnInit(): void {
-    
+
       //Liste des specialités selectable
     this.getSpecialite = this.specialiteService.getAllSpecialites();
     this.getSpecialite.subscribe((response) => {
       this.specialites = response;
-      
+
     }, (error) => {
       console.log(error);
-    }) 
+    })
   }
 
 
   onSubmit(monForm) {
     // TODO: Use EventEmitter with form value
- 
+
     if(this.profilRecupere =="patient"){
       this.personne= {
         "id" : null,
@@ -94,8 +98,11 @@ export class InscriptionComponent implements OnInit {
         "username" : this.username,
         "password" : this.password
       }
-      console.log(this.personne);
-      this.post= this.patientService.postOnePatient(this.personne);
+
+      this.error =this.post= this.patientService.postOnePatient(this.personne);
+      if(this.error){
+        this.pb = true;
+      }
 
     }else if(this.profilRecupere=="docteur"){
       this.personne= {
@@ -131,16 +138,38 @@ export class InscriptionComponent implements OnInit {
     }
   }
 
-  //GERER LA SELECTION MULTIPLE 
+  confirmationPseudo(eventConfirmerUsername){
+    var pseudoTape = (<HTMLInputElement>eventConfirmerUsername.target).value;
+    if(this.profilRecupere=="patient"){
+      var listePseudo = this.patientService.getAllPatientsPseudo();
+      ;
+      listePseudo.subscribe((response) => {
+        this.pseudos = response;
+        console.log(this.pseudos);
+          for(var pseudoT of this.pseudos){
+            if(pseudoT==pseudoTape){
+              this.pseudo = true;
+              console.log("je suis dans la comparaison");
+            }
+          }
+      }, (error) => {
+        console.log(error);
+      })
+
+
+    }
+
+  }
+  //GERER LA SELECTION MULTIPLE
   selectMultiple(e) {
     var el = e.target;
     if (el.tagName.toLowerCase() == 'option' && el.parentNode.hasAttribute('multiple')) {
         e.preventDefault();
-  
+
         // toggle selection
-        if (el.hasAttribute('selected')){el.removeAttribute('selected');} 
+        if (el.hasAttribute('selected')){el.removeAttribute('selected');}
         else {el.setAttribute('selected', '')};
-  
+
         // hack to correct buggy behavior
         var select = el.parentNode.cloneNode(true);
         el.parentNode.parentNode.replaceChild(select, el.parentNode);
@@ -150,7 +179,7 @@ export class InscriptionComponent implements OnInit {
   //recupererSpecialite(event: Event){
     //   event.preventDefault();
     //   this.specialiteRecuperee = (<HTMLInputElement>event.target).value;
-      
-      
+
+
     // }
 }

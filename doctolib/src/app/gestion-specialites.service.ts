@@ -12,7 +12,7 @@ export class GestionSpecialitesService {
 
 
   getAllSpecialites(){
-    let getAllSpe=this.http.get<Specialite[]>("http://localhost:8000/api/specialites",{
+    let getAllSpe=this.http.get<Specialite[]>("http://localhost:8000/apo/specialites",{
     observe : 'body',
   })
     return getAllSpe;

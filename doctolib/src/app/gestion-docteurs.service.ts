@@ -7,7 +7,7 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class GestionDocteursService {
-  
+
   constructor(private http : HttpClient) {
 
   }
@@ -42,9 +42,9 @@ export class GestionDocteursService {
   }
 
   postOneDocteur(docteur){
-    
+
     console.log("je suis dans le service");
-    this.http.post<any>( "http://localhost:8000/api/docteurs",{
+    this.http.post<any>( "http://localhost:8000/apo/docteurs",{
       numeroOrdre : docteur.numeroOrdre,
       nom : docteur.nom,
       prenom : docteur.prenom,
@@ -64,7 +64,7 @@ export class GestionDocteursService {
     }, (error) => {
       console.log(error);
     })
-      
+
   }
 
   putOneDocteur(docteur){

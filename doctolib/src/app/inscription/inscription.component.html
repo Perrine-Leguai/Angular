@@ -1,5 +1,5 @@
 <div class="border p-3">
-  
+
     <div class="form-group">
       <label for="exampleFormControlSelect1">Êtes vous un.e patient.e ou un.e praticien.ne ?</label>
       <select class="form-control" id="exampleFormControlSelect1" (change)="recupProfil($event)">
@@ -7,13 +7,18 @@
         <option value="patient">Patient.e</option>
         <option value="docteur">Praticien</option>
       </select>
-      {{pattern}}
+
     </div>
-    
+<div [hidden]="!pb" class="alert alert-danger">Inscription incorrecte</div>
   <form [hidden]="!profilRecupere "  (ngSubmit)="onSubmit(monForm.value)" #monForm="ngForm" >
     <div class="form-group">
       <label for="username" class="text-dark">Pseudo</label>
-      <input [(ngModel)]="username" type="text" class="form-control" name="username" id="username" placeholder="Ninja65"  required> 
+      <input [(ngModel)]="username" type="text" class="form-control" name="username" id="username"
+      (keyup)="confirmationPseudo($event)"
+      pattern="[A-Z]|[0-9]|[a-z]" placeholder="Ninja65"  required>
+      <div [hidden]="!pseudo">
+        <p id="pseudoKo">Pseudo déjà utilisé</p>
+      </div>
     </div>
     <div class="row">
       <div class="form-group col-6">
@@ -32,22 +37,24 @@
     <div class="row">
       <div class="form-group col-6">
         <label for="codePostal" class="text-dark">Code Postal</label>
-        <input [(ngModel)]="codePostal" type="text" class="form-control" name="codePostal" id="codePostal" placeholder="59850" required>
+        <input [(ngModel)]="codePostal" type="text" class="form-control" name="codePostal" id="codePostal" pattern="/^(([0-8][0-9])|(9[0-5]))[0-9]{3}$/" placeholder="59850" required>
       </div>
       <div class="form-group col-6">
         <label for="ville" class="text-dark">Ville</label>
-        <input [(ngModel)]="ville" type="text" class="form-control" name="ville" id="ville" placeholder="Nieppe" required>
+        <input [(ngModel)]="ville" type="text" class="form-control" name="ville" id="ville" pattern="^[[:alpha:]]([-' ]?[[:alpha:]])*$"  placeholder="Nieppe" required>
       </div>
     </div>
-    
+
     <div class="form-group">
       <label for="noidentification" class="text-dark">{{this.profilRecupere=="patient" ? "N° Carte Vitale" : "N° Ordre"}}</label>
-      <input [(ngModel)]="noIdentification" type="text" class="form-control" name="numeroIdentification" id="noIdentification" placeholder="15912512211254" required>
+      <input [(ngModel)]="noIdentification" type="text" class="form-control" name="numeroIdentification" id="noIdentification"
+              pattern="{{this.profilRecupere=='patient' ? '/^[12][0-9]{2}(0[1-9]|1[0-2])(2[AB]|[0-9]{2})[0-9]{3}[0-9]{3}([0-9]{2})?$/x' : '[0-9]{9}'}}"
+              placeholder="15912512211254" required>
     </div>
 
     <div class="form-group" [hidden]="profilRecupere=='patient'">
       <label for="selectSpe" class="text-dark">Specialites</label>
-      <select id="selectSpe"  class="form-select selectpicker" [(ngModel)]="specialite" name="specialite" size="7" (click)="selectMultiple($event)"  multiple> 
+      <select id="selectSpe"  class="form-select selectpicker" [(ngModel)]="specialite" name="specialite" size="7" (click)="selectMultiple($event)"  multiple>
         <option disabled>-- Sélectionner une ou plusieurs spécialité.s --</option>
         <option   *ngFor="let specialite of specialites"  value="{{specialite.id}}"> {{specialite.nom}} et {{specialite.id}}</option>
       </select>
@@ -79,8 +86,8 @@
       </div>
   </div>
   <div class=" d-flex justify-content-center mt-5">
-    <button class="btn btn-primary " [disabled]="!ok" > S'inscrire</button>
-</div> 
+    <button class="btn btn-primary " [disabled]="!ok && monForm.invalid" > S'inscrire</button>
+</div>
   </form>
-  
+
 </div>
