@@ -6,11 +6,18 @@ import { Injectable } from "@angular/core";
 export class JwtInterceptor implements HttpInterceptor {
 
   intercept(request:HttpRequest<any>, next:HttpHandler):Observable<HttpEvent<any>> {
+    if(request.url=="http://localhost:8000/api/login_check"){
+
+      return next.handle(request);
+    }
     let jwt = JSON.parse(localStorage.getItem('jwt'));
+    
     if (jwt) {
+      
       request = request.clone({
         setHeaders: {
-          Authorization: `Bearer $(jwt)`
+          Authorization: `Bearer ` + jwt.token
+          
         }
       });
     }

@@ -44,8 +44,8 @@ export class ConnexionComponent implements OnInit {
 
   ngOnInit(): void {
     if (localStorage.length != 0) {
-      console.log(localStorage);
-      this.router.navigate(['/bienvenue']);
+      
+      this.router.navigate(['/bienvenue/infos']);
     }
   }
 
@@ -59,7 +59,6 @@ export class ConnexionComponent implements OnInit {
         if(personne.username == (<HTMLInputElement>event.target).value){
           //fait apparaitre le message de bienvenue si le pseudo y est
           this.ok = true;
-          console.log(this.ok);
           break;
         }else if(personne.username != (<HTMLInputElement>event.target).value) {
           this.ok = false
@@ -70,17 +69,13 @@ export class ConnexionComponent implements OnInit {
 
 
   }else if(this.profilRecupere=="patient"){
-    console.log('je suis un.e patient.e');
     this.get = this.patientService.getAllPatientsPseudo();
     this.get.subscribe((response)=>{
       this.listePersonne= response;
-
       for(var personne of this.listePersonne){
-        console.log(personne);
         if(personne == (<HTMLInputElement>event.target).value){
           //fait apparaitre le message de bienvenue si le pseudo y est
           this.ok = true;
-
           break;
         }else if(personne.username != (<HTMLInputElement>event.target).value) {
           this.ok = false
@@ -101,7 +96,15 @@ export class ConnexionComponent implements OnInit {
     const password = form.value['password'];
 
     this.authenticationService.login(username, password, this.profilRecupere).subscribe(data => {
-
+      // localStorage.setItem('userInfo', JSON.stringify(userInfo));
+          localStorage.setItem('jwt', JSON.stringify(data));
+          console.log('log de jwt de localstorage de la fonction login ' + localStorage.getItem('jwt'));
+          
+        this.authenticationService.getUserInfo(username, this.profilRecupere).subscribe((userInfo) => {
+            localStorage.setItem('userInfo', JSON.stringify(userInfo));
+          
+        })
+        console.log(localStorage.getItem('userInfo')+" les infos sont elles bien récupérées à la connexion ?")
       this.router.navigate(['/bienvenue']);
     }, error => {
       this.SpinnerService.hide();

@@ -1,10 +1,12 @@
 import { Component, OnInit, Self } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { GestionSpecialitesService } from 'src/app/gestion-specialites.service';
+//MODELE
 import { Specialite } from 'src/app/modeles/specialite.model';
+//SERVICES
+import { GestionSpecialitesService } from 'src/app/gestion-specialites.service';
 import { GestionDocteursService } from '../../gestion-docteurs.service';
 import { GestionPatientsService } from '../../gestion-patients.service';
-import { Docteur } from '../../modeles/docteur.model';
+//SPINNER
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-affichage',
@@ -15,23 +17,30 @@ export class AffichageComponent implements OnInit {
 
     get ;
     get1;
-    profil : string="DOCTEUR";
-    id:number ;
+    profil : string= localStorage.getItem('profilRecupere');
+    id:number;
+    personneConnectee = JSON.parse(localStorage.getItem('userInfo'));
     personne: any;
     profilDoc: boolean = false;
     listeSpe: Specialite[];
   constructor(
     private docteurService : GestionDocteursService,
     private patientService : GestionPatientsService,
-    private specialiteService : GestionSpecialitesService) { }
+    private specialiteService : GestionSpecialitesService,
+    private SpinnerService:NgxSpinnerService
+    ) { }
 
   ngOnInit(): void {
-    if(this.profil ==="DOCTEUR"){
-      this.get = this.docteurService.getOneDocteur(2);
+    
+    console.log(this.personneConnectee);
+    this.SpinnerService.show();
+    if(this.profil ==="docteur"){
+      this.get = this.docteurService.getOneDocteur(this.personneConnectee.id);
       this.profilDoc=true;
       
-    }else if(this.profil==="PATIENT"){
-      this.get = this.patientService.getOnePatient(1);
+    }else if(this.profil==="patient"){
+      
+      this.get = this.patientService.getOnePatient(this.personneConnectee.id);
     }
     this.get.subscribe((response) => {
       this.personne = response;
@@ -47,7 +56,7 @@ export class AffichageComponent implements OnInit {
         })
       }
       
-      
+      this.SpinnerService.hide();
     }, (error) => {
       console.log(error);
     })

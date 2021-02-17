@@ -6,6 +6,7 @@ import { GestionDocteursService } from '../gestion-docteurs.service';
 import { GestionRdvsService } from '../gestion-rdvs.service';
 import { Patient } from '../modeles/patient.model';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { GestionPatientsService } from '../gestion-patients.service';
 
 @Component({
   selector: 'app-prise-rdv',
@@ -22,13 +23,24 @@ export class PriseRdvComponent implements OnInit {
   dateRecuperee: string;
   doc : Docteur;
   getDoc1: any;
-  patientId : number = 8 ; //sera initialisé à la connexion
+  patientId : number ; //sera initialisé à la connexion
+  docId:number;
   navigationSubscription;
+  listePatientsSuivis: any [];
+  getPatientsSuivis: any;
+  patientRecupere: any;
+  getPatient1: any;
+  patient: any;
+
+  //recupération des données de la personne connectée
+  profil : string= localStorage.getItem('profilRecupere');
+  personneConnectee = JSON.parse(localStorage.getItem('userInfo'));
 
   constructor(
     private specialiteService : GestionSpecialitesService,
     private docteurService : GestionDocteursService,
     private priseRdvService : GestionRdvsService,
+    private patientService : GestionPatientsService,
     private router: Router,
     private route : ActivatedRoute) {
 
@@ -44,12 +56,19 @@ export class PriseRdvComponent implements OnInit {
     }, (error) => {
       console.log(error);
     })
+    if(this.profil=="docteur"){
+      this.getPatientsSuivis = this.patientService.getPatientsParDocteur(this.personneConnectee.id);
+      this.getPatientsSuivis.subscribe((response)=>{
+      this.listePatientsSuivis = response;
+    });
+    }
+    
   }
 
   recupSpecialite(event : Event){
 
     this.specialiteRecuperee = (<HTMLInputElement>event.target).value
-    console.log(this.specialiteRecuperee);
+    
     // affichage des docteurs ayant cette spécialité
     this.getDoc = this.specialiteService.getDocsBySpecialite(this.specialiteRecuperee);
     this.getDoc.subscribe((response) =>{
@@ -60,26 +79,39 @@ export class PriseRdvComponent implements OnInit {
   }
 
   recupDoc(event : Event){
+    this.patientId= this.personneConnectee.id
+
     this.docRecupere = (<HTMLInputElement>event.target).value
 
     this.getDoc1 = this.docteurService.getOneDocteur(this.docRecupere);
     this.getDoc1.subscribe((response)=>{
       this.doc = response;
-      console.log(this.doc);
-
     })
+
+    this.docId = this.doc.id;
   }
 
+  recupPatient(event: Event){
+    this.docId = this.personneConnectee.id
+    this.patientRecupere = (<HTMLInputElement>event.target).value
+
+    this.getPatient1 = this.patient.getOnePatient(this.patientRecupere);
+    this.getPatient1.subscribe((response)=>{
+      this.patient = response;
+    })
+
+    this.patientId = this.patient.id
+  }
+  
+
   dateRecup(event :Event){
-
     this.dateRecuperee = (<HTMLInputElement>event.target).value
-
   }
 
   validerRdv(){
-    this.priseRdvService.postRdv(this.dateRecuperee, this.doc.id, this.patientId);
-    this.router.navigate(['/bienvenue'], {relativeTo: this.route});
 
+    this.priseRdvService.postRdv(this.dateRecuperee, this.doc.id, this.patientId);
+    this.router.navigate(['/bienvenue/infos'], {relativeTo: this.route});
   }
 
 

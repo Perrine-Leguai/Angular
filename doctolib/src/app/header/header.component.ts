@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from '../authentication.service';
 import { GestionDocteursService } from '../gestion-docteurs.service';
 import { GestionPatientsService } from '../gestion-patients.service';
 
@@ -13,7 +14,8 @@ export class HeaderComponent implements OnInit {
   id:number = 1;
   constructor(
     private docteurService: GestionDocteursService,
-    private patientService : GestionPatientsService
+    private patientService : GestionPatientsService,
+    private authenticationService: AuthenticationService
   ) { }
 
   ngOnInit(): void {
@@ -29,9 +31,13 @@ export class HeaderComponent implements OnInit {
     }
 
     this.delete.subscribe((response) => {
-      console.log(response);
+      // console.log(response);
     }, (error) => {
-      console.log(error);
+      // console.log(error);
     })
+  }
+
+  public seDeconnecter(){
+      this.authenticationService.logout();
   }
 }

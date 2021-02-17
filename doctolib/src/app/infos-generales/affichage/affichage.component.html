@@ -3,9 +3,11 @@
   <!-- affichage de toutes les informations docteurs -->
   <div class="row">
     <div id="infos" class="col-6">
-      <div class="mr-1 ml-1 mt-1 mb-2">Dr. {{personne?.nom |  uppercase}} {{personne?.prenom | titlecase }} <br> {{personne?.numeroOrdre}}</div>
+      <div class="mr-1 ml-1 mt-1 mb-2"> {{profil =="docteur" ? "Dr." : ""}} {{personne?.nom |  uppercase}} {{personne?.prenom | titlecase }} 
+        <br> 
+        {{profil =="docteur" ? personne?.numeroOrdre : personne?.numeroCarteVitale}}</div>
       <div class="m-1">
-        <div>{{personne?.adresseTravail}}</div>
+        <div>{{profil =="docteur" ? personne?.adresseTravail : personne?.adresse}}</div>
         <div>{{personne?.codePostal}}</div>
         <div>{{personne?.ville}}</div>
       </div>

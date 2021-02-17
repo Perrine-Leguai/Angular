@@ -19,20 +19,7 @@ export class InfosGeneralesComponent implements OnInit {
     private patientService : GestionPatientsService) { }
 
   ngOnInit(): void {
-    if(this.profil ==="DOCTEUR"){
-      this.get = this.docteurService.getOneDocteur(2);
-      this.profilDoc=true;
-    }else if(this.profil==="PATIENT"){
-      this.get = this.patientService.getOnePatient(1);
-      this.profilPatient = true;
-    }
-
-    this.get.subscribe((response) => {
-      this.personne = response;
-      
-    }, (error) => {
-      console.log(error);
-    })
+    
   }
 
 

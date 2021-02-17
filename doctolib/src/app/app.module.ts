@@ -34,7 +34,7 @@ import { AffichageComponent } from './infos-generales/affichage/affichage.compon
 import { ModificationComponent } from './infos-generales/modification/modification.component';
 
 //GESTION DU JWT
-import {JwtInterceptor} from './_jwtInterceptor/jwtInterceptor.component'
+import {JwtInterceptor} from './_jwtInterceptor/jwtInterceptor.interceptor'
 
 const ROUTES: Routes =[
   {path: "", component: HorsCoComponent,
@@ -87,8 +87,13 @@ const ROUTES: Routes =[
 
   ],
   exports:[RouterModule],
-  providers: [GestionRdvsService, GestionDocteursService, GestionPatientsService, GestionSpecialitesService, AuthenticationService,
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+  providers: [
+    GestionRdvsService, 
+    GestionDocteursService, 
+    GestionPatientsService, 
+    GestionSpecialitesService, 
+    AuthenticationService,
+    { provide: HTTP_INTERCEPTORS, useClass : JwtInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })

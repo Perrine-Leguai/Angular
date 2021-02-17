@@ -32,7 +32,7 @@
           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
             <a class="dropdown-item" [routerLink]="['/bienvenue/infos/modification']">Modifier mes infos</a>
             <!-- renvoie au formulaire de modif des infos -->
-            <a class="dropdown-item" [routerLink]="['/']">Me déconnecter</a>
+            <a class="dropdown-item" [routerLink]="['/']" (click)="seDeconnecter()">Me déconnecter</a>
             <!-- session start à zero -->
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" [routerLink]="['/']" (click)="supprimerCompte($event)" >Supprimer mon compte</a>

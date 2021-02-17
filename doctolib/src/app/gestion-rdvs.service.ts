@@ -11,7 +11,7 @@ export class GestionRdvsService {
   ngOnInit(){ };
 
   getRdvsSelonLaPersonneConnectee(id :number, role:string){
-    let getRdv = this.http.get<Rdv[]>("http://localhost:8000/api/rdvs/"+id,{
+    let getRdv = this.http.get<Rdv[]>("http://localhost:8000/api/rdvs/"+role+"/"+id,{
       observe : 'body',
     })
     return getRdv;

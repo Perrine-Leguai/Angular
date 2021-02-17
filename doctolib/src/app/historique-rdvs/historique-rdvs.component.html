@@ -5,8 +5,8 @@
     <div *ngFor="let rdv of listeRdvs" class="col-4" >
       <div *ngIf=" rdv.date < currentDate ">
         <strong>{{rdv.date | date:'dd/MM/yyyy'}}</strong> <br>
-        {{rdv.idPatient[0]}} {{rdv.idPatient[1]}}<br>
-        {{rdv.idPatient[2]}}
+        {{profil=="docteur" ? rdv.idPatient[0]: rdv.idDocteur[0]}} {{profil=="docteur" ? rdv.idPatient[1] : rdv.idDocteur[1]}}<br>
+        {{profil=="docteur" ? rdv.idPatient[2] : rdv.idDocteur[2]}}
       </div>
     </div>
       

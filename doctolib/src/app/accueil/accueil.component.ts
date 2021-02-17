@@ -29,7 +29,7 @@ export class AccueilComponent implements OnInit {
       this.personne = response;
       this.countDoc = this.personne.length; 
     }, (error) => {
-      console.log(error);
+       console.log(error);
     })
 
     this.getRdv = this.rdvService.getAllRdvs();
@@ -37,7 +37,7 @@ export class AccueilComponent implements OnInit {
       this.rdv = response;
       this.countRdv = this.rdv.length; 
     }, (error) => {
-      console.log(error);
+       console.log(error);
     })
   }
   
